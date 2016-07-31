@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!--@version $Id: BasicExample.html 3314 2015-07-10 18:28:45Z dcollins $-->
 <html lang="en">
-
 <head>
     <!--NOTE: Most Web World Wind examples use jquery, Bootstrap and requirejs but those technologies are NOT-->
     <!--required by Web World Wind. See SimplestExample.html for an example of using Web World Wind without them.-->
@@ -11,64 +10,229 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <!--<script data-main="SatTracker/SatTracker2" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>-->
     <link rel="stylesheet" href="./SatTracker/style2.css">
-</head>
+    <!-- <link rel="stylesheet" href="sliderassets/css/bootstrap.css" />-->
+    <link rel="stylesheet" href="bootstrap-slider/css/slider.css" />
 
-<body>
-        <div id="globe" class="container; width: 100%; height: auto">
-            <canvas id="canvasOne" style= "color:white; background-image: url('./SatTracker/bluespace.jpg'); width: 100%; height: auto" >
-                Your browser does not support HTML5 Canvas.
-            </canvas>
-                <div id="overlay">
-                    <header style="color:white">
-                        <h1 style="text-align: left">Satellite Tracker</h1>
-                        <div style="color:black">
-                            <button class="allSats">ALL OFF</button>
-                            <button class="payloads">PAYLOADS OFF</button>
-                            <button class="rockets">ROCKETS OFF</button>
-                            <button class="debris">DEBRIS OFF</button>
-                        </div>
-                        <br>
-                        <div style="color:black">
-                            <h4 style="color:white">Orbit Range:</h4>
-                            <button class="leo">LEO ON</button>
-                            <button class="meo">MEO ON</button>
-                            <button class="heo">HEO ON</button>
-                        </div>
-                        <br>
-                        <div style="color:black">
-                            <h4 style="color: white">Tools:</h4>
-                            <button class='follow'>Follow On</button>
-                            <button class='mesh'>Mesh On</button>
-                        </div>
-                        <br>
-                        <div style="color: black">
-                            <h4 style="color: white">Ground Stations</h4>
-                            <button class='gStations'>GS OFF</button>
-                        </div>
-                    </header>
+    <!--Title-->
+    <title>SPACEBIRDS</title>
+    <link rel="shortcut icon" href="SatTracker/spacebirdlogo_dark.png" />
+
+
+    <!-- pop up menu-->
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+
+
+    <style>
+
+        @font-face {
+            font-family: 'riko';
+            src: url('SatTracker/rikos.regular.ttf') format('truetype');
+        }
+        h1, #projectHeader{
+            font-family: 'riko';
+        }
+    </style>
+
+    <!-- help menu-->
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+</head>
+<body  style="background-image: url('./SatTracker/space.jpeg');" >
+<br>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Image Logo -->
+            <img src="SatTracker/spacebirdlogo.png" height="50" width="50" >
+            <a class="navbar-brand" id="projectHeader"href="#">SPACEBIRDS</a>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link1</a></li>
+                <li><a href="#">Link2</a></li>
+                <li><a href="#" id="openerHelp">Help</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+<div id="globe" class="container" style="width: 100%; height: auto">
+
+    <br>
+    <canvas id="canvasOne" style= "color:white; width: 100%; height: auto" >
+        Your browser does not support HTML5 Canvas.
+    </canvas>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+
+                <br>
+                <h4>Satellite Tracker</h4>
+
+                <!--scrollbar-->
+
+
+                <div style="color:black">
+
+                    <button id="allSats"  class="btn btn-default btn-sm btn-block">ALL OFF</button>
+                    <button id="payloads" class="btn btn-default btn-sm btn-block">PAYLOADS OFF</button>
+                    <button id="rockets" class="btn btn-default btn-sm btn-block">ROCKETS OFF</button>
+                    <button id="debris" class="btn btn-default btn-sm btn-block">DEBRIS OFF</button>
                 </div>
-                <div id="overlay2" style="color: black">
-                    <div class="col-sm-2" style="width: 150px">
-                        <h4>Projection</h4>
-                        <div class="dropdown" id="projectionDropdown">
+                <br>
+                <div style="color:black">
+                    <h4 style="color:white">Orbit Range</h4>
+                    <button id="leo" class="btn btn-default btn-sm btn-block">LEO ON</button>
+                    <button id="meo" class="btn btn-default btn-sm btn-block">MEO ON</button>
+                    <button id="heo" class="btn btn-default btn-sm btn-block">HEO ON</button>
+                </div>
+                <br>
+                <div style="color:black">
+                    <h4 style="color: white">Tools</h4>
+                    <button id='follow' class="btn btn-default btn-sm btn-block">FOLLOW ON</button>
+                    <button id='mesh' class="btn btn-default btn-sm btn-block">MESH ON</button>
+                </div>
+                <br>
+                <div style="color: black">
+                    <h4 style="color: white">Ground Stations</h4>
+                    <button id="gStations" class="btn btn-default btn-sm btn-block">GS OFF</button>
+                </div>
+                <!-- Slider -->
+                <div class="row">
+                    <div class="span12">
+                        <div style="padding: 15px">
+                            <input type="text" class="slider" data-slider-value="50"><br />
                         </div>
                     </div>
                 </div>
-                <div id="infoBox">
-                    <h4 style="color: white">Sat Info:</h4>
-                    <p>LATITUDE: <span id="latitude"></span></p>
-                    <p>LONGITUDE: <span id="longitude"></span></p>
-                    <p>ALTITUDE: <span id="altitude"></span></p>
-                    <p>SAT TYPE: <span id="type"></span></p>
-                    <p>INTLDES: <span id="intldes"></span></p>
-                    <p>NAME: <span id="name"></span></p>
-                </div>
-            <br>
-            </div>
+                <!-- menu pop up-->
+                <div id="dialog" title="More Information">
+                    <p>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Explanation</th>
+                        </tr>
+                        <tr>
+                            <td>LEO</td>
+                            <td>info</td>
 
+                        </tr>
+                        <tr>
+                            <td>MEO</td>
+                            <td>info</td>
+                        </tr>
+                        <tr>
+                            <td>HEO</td>
+                            <td>info</td>
+                        </tr>
+                        <tr>
+                            <td>Blue Dots</td>
+                            <td>info</td>
+                        </tr>
+                        <tr>
+                            <td>Red Dots</td>
+                            <td>info</td>
+                        </tr>
+                        <tr>
+                            <td>Grey Dots</td>
+                            <td>info</td>
+                        </tr>
+                        <tr>
+                            <td>Mesh</td>
+                            <td>info</td>
+                        </tr>
+                    </table>
+                    </p>
+                </div>
+                <script>
+                    $(function () {
+
+                        $( "#dialog" ).dialog({
+                            autoOpen: false,
+                            show: {
+                                effect: "fade",
+                                duration: 1000
+                            },
+                            hide: {
+                                effect: "fade",
+                                duration: 1000
+                            }
+                        });
+
+                        $( "#openerHelp" ).on( "click", function() {
+                            $( "#dialog" ).dialog( "open" );
+                        });
+
+                    } );
+                </script>
+
+
+            </div>
+        </div>
+    </div>
+    <!--<div id="overlay2" style="color: black">
+      <div class="col-sm-2" style="width: 150px">
+        <h4>Projection</h4>
+        <div class="dropdown" id="projectionDropdown">
+        </div>
+      </div>
+    </div>-->
+    <div id="infoBox">
+        <h4 style="color: white">Satellite Information</h4>
+        <p>NAME: <span id="name"></span></p>
+        <p>SAT TYPE: <span id="type"></span></p>
+        <p>LATITUDE: <span id="latitude"></span></p>
+        <p>LONGITUDE: <span id="longitude"></span></p>
+        <p>ALTITUDE: <span id="altitude"></span></p>
+        <p>INTLDES: <span id="intldes"></span></p>
+
+    </div>
+
+    <br>
+
+</div>
+
+
+
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<script src="bootstrap-slider/assets/js/bootstrap.js"></script>
+<script src="bootstrap-slider/js/slider.js"></script>
+<script>
+    $(function () {
+        $('.slider').slider();
+    });
+</script>
 </body>
-    <script src="worldwindlib.js"></script>
-    <script src="LayerManager.js"></script>
-    <script src="SatTracker/util/Satellite.js"></script>
-    <script src="SatTracker2.js"></script>
+<script src="worldwindlib.js"></script>
+<script src="LayerManager.js"></script>
+<script src="SatTracker/util/Satellite.js"></script>
+<script src="SatTracker2.js"></script>
 </html>
