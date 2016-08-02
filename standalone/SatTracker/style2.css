@@ -28,7 +28,52 @@ body {
     border-radius:0;
     opacity: 0.5;
     filter: alpha(opacity=50);
+    font-size: 1.3em;
+    border: none;
 }
+
+.dropdown-menu {
+    background-color: transparent;
+    color:#ffffff;
+    border-radius:0;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.dropdown li a {
+    color: white;
+    border: none;
+
+}
+
+.form-control {
+    background-color: dimgray;
+    color: white;
+    border: none;
+}
+
+.btn-block{
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-block:hover{
+    background-color: transparent;
+    border: none;
+    color: black;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 
 .navbar-inverse:hover {
     opacity: 1.0;
@@ -47,7 +92,7 @@ body {
 }
 
 .dropdown>li.clear-option {
-    background: #511;
+    background: transparent;
     display: none;
 }
 
@@ -68,11 +113,26 @@ body {
 }
 #infoBox {
     position: fixed;
-    right: 10px;
-    bottom: 10px;
-    background: rgba(0, 0, 0, 0.5);
+    left: 10px;
+    top: 50px;
+    background: transparent;
     padding-left: 10px;
     padding-right: 50px;
     padding-bottom: 10px;
+    padding-top: 10px;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+#infoBox:hover {
+    position: fixed;
+    left: 10px;
+    top: 50px;
+    background: transparent;
+    padding-left: 10px;
+    padding-right: 50px;
     padding-bottom: 10px;
+    padding-top: 10px;
+    opacity: 1.0;
+    filter: alpha(opacity=100)
 }

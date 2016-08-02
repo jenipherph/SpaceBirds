@@ -12,6 +12,14 @@ var wwd = new WorldWind.ObjectWindow("canvasOne");
 wwd.navigator.lookAtLocation.altitude = 0;
 wwd.navigator.range = 5e7;
 
+//navbar
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown-submenu();
+});
+
 
 //Add imagery layers.
 var layers = [
@@ -147,11 +155,11 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
 
     //Sat Tyoe toggles
     $('#allSats').click(function() {
-        if ($(this).text() == "ALL OFF") {
-            $(this).text("ALL ON");
-            $('#payloads').text("PAYLOADS OFF");
-            $('#rockets').text("ROCKETS OFF");
-            $('#debris').text("DEBRIS OFF");
+        if ($(this).text() == "Turn All Options On") {
+            $(this).text("Turn All Options Off");
+            $('#payloads').text("Turn Payloads On");
+            $('#rockets').text("Turn Rockets On");
+            $('#debris').text("Turn Debris On");
             var satPac = null;
             endFunc();
             wwd.addLayer(leoSatLayer);
@@ -163,17 +171,17 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             var satPac = './SatTracker/TLE.json';
             selectSat(satPac);
         } else {
-            $(this).text("ALL OFF");
+            $(this).text("Turn All Options On");
             endFunc();
             satPac = null;
         }
     });
     $('#payloads').click(function() {
-        if ($(this).text() == "PAYLOADS OFF") {
-            $(this).text("PAYLOADS ON");
-            $('#allSats').text("ALL OFF");
-            $('#rockets').text("ROCKETS OFF");
-            $('#debris').text("DEBRIS OFF");
+        if ($(this).text() == "Turn Payloads On") {
+            $(this).text("Turn Payloads Off");
+            $('#allSats').text("Turn All Options On");
+            $('#rockets').text("Turn Rockets On");
+            $('#debris').text("Turn Debris On");
             endFunc();
             wwd.addLayer(leoSatLayer);
             wwd.addLayer(meoSatLayer);
@@ -184,17 +192,17 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             var satPac = './SatTracker/payloadsTLE.json';
             selectSat(satPac);
         } else {
-            $(this).text("PAYLOADS OFF");
+            $(this).text("Turn Payloads On");
             endFunc();
             satPac = null;
         }
     });
     $('#rockets').click(function() {
-        if ($(this).text() == "ROCKETS OFF") {
-            $(this).text("ROCKETS ON");
-            $('#payloads').text("PAYLOADS OFF");
-            $('#allSats').text("ALL OFF");
-            $('#debris').text("DEBRIS OFF");
+        if ($(this).text() == "Turn Rockets On") {
+            $(this).text("Turn Rockets Off");
+            $('#payloads').text("Turn Payloads On");
+            $('#allSats').text("Turn All Options On");
+            $('#debris').text("Turn Debris On");
             endFunc();
             wwd.addLayer(leoSatLayer);
             wwd.addLayer(meoSatLayer);
@@ -205,17 +213,17 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             var satPac = './SatTracker/rocketStagesTLE.json';
             selectSat(satPac);
         } else {
-            $(this).text("ROCKETS OFF");
+            $(this).text("Rockets Off");
             endFunc();
             satPac = null;
         }
     });
     $('#debris').click(function() {
-        if ($(this).text() == "DEBRIS OFF") {
-            $(this).text("DEBRIS ON");
-            $('#payloads').text("PAYLOADS OFF");
-            $('#rockets').text("ROCKETS OFF");
-            $('#allSats').text("ALL OFF");
+        if ($(this).text() == "Turn Debris On") {
+            $(this).text("Turn Debris Off");
+            $('#payloads').text("Turn Payloads On");
+            $('#rockets').text("Turn Rockets On");
+            $('#allSats').text("Turn All Options On");
             endFunc();
             wwd.addLayer(leoSatLayer);
             wwd.addLayer(meoSatLayer);
@@ -226,7 +234,7 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
             var satPac = './SatTracker/debrisTLE.json';
             selectSat(satPac);
         } else {
-            $(this).text("DEBRIS OFF");
+            $(this).text("Turn Debris On");
             endFunc();
             satPac = null;
         }
@@ -234,39 +242,39 @@ $.get('./SatTracker/groundstations.json', function(groundStations) {
 
     //Range Toggles
     $('#leo').click(function() {
-        if ($(this).text() == "LEO OFF") {
-            $(this).text("LEO ON");
+        if ($(this).text() == "Turn LEO On") {
+            $(this).text("Turn LEO Off");
             leoSatLayer.enabled = true;
         } else {
-            $(this).text("LEO OFF");
+            $(this).text("Turn LEO On");
             leoSatLayer.enabled = false;
         }
     });
     $('#meo').click(function() {
-        if ($(this).text() == "MEO OFF") {
-            $(this).text("MEO ON");
+        if ($(this).text() == "Turn MEO On") {
+            $(this).text("Turn MEO Off");
             meoSatLayer.enabled = true;
         } else {
-            $(this).text("MEO OFF");
+            $(this).text("Turn MEO On");
             meoSatLayer.enabled = false;
         }
     });
     $('#heo').click(function() {
-        if ($(this).text() == "HEO OFF") {
-            $(this).text("HEO ON");
+        if ($(this).text() == "Turn HEO On") {
+            $(this).text("Turn HEO Off");
             heoSatLayer.enabled = true;
         } else {
-            $(this).text("HEO OFF");
+            $(this).text("Turn HEO On");
             heoSatLayer.enabled = false;
         }
     });
 
     $('#gStations').click(function() {
-        if ($(this).text() == "GS OFF") {
-            $(this).text("GS ON");
+        if ($(this).text() == "Turn GS On") {
+            $(this).text("Turn GS Off");
             groundStationsLayer.enabled = true;
         } else {
-            $(this).text("GS OFF");
+            $(this).text("Turn GS On");
             groundStationsLayer.enabled = false;
         }
     });
